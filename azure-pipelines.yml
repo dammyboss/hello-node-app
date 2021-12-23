@@ -27,3 +27,14 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifacts: drop'
   
+- task: Npm@1
+  inputs:
+    command: 'install'
+  
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Visual Studio Enterprise(85c7908d-8028-4894-af5d-1991ee8f0450)'
+    appType: 'webApp'
+    WebAppName: 'pipe-app'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
